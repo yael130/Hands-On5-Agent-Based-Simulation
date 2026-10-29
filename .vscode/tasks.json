@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compilar y ejecutar regresiones JADE",
+      "type": "shell",
+      "command": "set -e; JADE_JAR=\"../JADE-all-4.6.0/JADE-bin-4.6.0/jade/lib/jade.jar\"; mkdir -p out; javac --release 25 -encoding UTF-8 -cp \"$JADE_JAR\" -d out $(find src/main/java -name '*.java'); java -cp \"out:$JADE_JAR\" regression.RegressionLauncher",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "clear": true
+      }
+    }
+  ]
+}
