@@ -3,14 +3,14 @@
 Implementación de tres técnicas de regresión con agentes JADE:
 
 - **SLR:** regresión lineal simple.
-- **PR:** regresión polinomial de grado 2.
-- **MLR:** regresión lineal múltiple con dos predictores.
+- **PR:** regresión polinomial cúbica (grado 3) con Batch Size y Machine Efficiency.
+- **MLR:** regresión lineal múltiple con 200 observaciones y tres predictores.
 
 Los modelos ajustan los coeficientes por mínimos cuadrados mediante las ecuaciones normales `beta = (X'X)^-1 X'y`, resueltas con eliminación gaussiana y pivoteo parcial. Cada agente tiene un único `OneShotBehaviour`; dentro de su `action()` define un dataset hardcodeado, ajusta el modelo, imprime ecuación, tres predicciones y R², y luego solicita su eliminación con `doDelete()`. El lanzador corre JADE sin consola gráfica para que funcione  desde una terminal sin X11; JADE guarda sus archivos auxiliares dentro de `out/`. La plataforma mantiene el proceso abierto tras terminar los agentes.
  
-Las siglas de las clases de agente corresponden a **SLR** (Simple Linear Regression), **PR** (Polynomial Regression) y **MLR** (Multiple Linear Regression). 
-`SRL` es el nombre del modelo simple solicitado en la actividad; 
-`MLR` es su modelo múltiple.
+Las siglas de las clases de agente corresponden a **SLR** (Simple Linear Regression), **PR** (Polynomial Regression) y **MLR** (Multiple Linear Regression). `SRL` es el nombre del modelo simple solicitado en la actividad.
+
+Los agentes SLR y PR usan los 26 pares de Batch Size/Machine Efficiency de la actividad. El agente MLR contiene una matriz de 200 observaciones y tres predictores; sus etiquetas se muestran de forma genérica como `x1`, `x2` y `x3`. Para probar otro dataset, reemplaza las filas de `x` y sus respuestas en `y`; los nombres de las variables se generan según el número de columnas.
 
 ## Estructura
 
@@ -34,4 +34,4 @@ java -cp "out:$JADE_JAR" regression.RegressionLauncher
 
 En VS Code también puedes abrir la paleta de comandos (`Ctrl+Shift+P`), elegir **Tasks: Run Task** y ejecutar **Compilar y ejecutar regresiones JADE**. La tarea compila de nuevo y abre la salida en una terminal integrada dedicada.
 
-`--release 25` asegura que las clases compiladas por `javac` 27 sean compatibles con la JVM 25. Los datos y los valores para las tres predicciones están definidos en el `action()` de cada agente.
+`--release 25` asegura que las clases compiladas por `javac 27`  sean compatibles con la JVM 25. Los datos y los valores para las tres predicciones están definidos en el `action()` de cada agente.

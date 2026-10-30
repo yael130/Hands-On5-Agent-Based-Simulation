@@ -16,20 +16,26 @@ public final class SLRAgent extends Agent {
         public void action() {
             try {
                 System.out.println("\n=== Regresión lineal simple (SLR) ===");
-                // Dataset de ejemplo hardcodeado: y = 2 + 1.5x aproximadamente.
-                double[] x = {1, 2, 3, 4, 5, 6};
-                double[] y = {3.2, 4.8, 6.4, 7.7, 9.3, 11.1};
+                // Batch Size (x) y Machine Efficiency (y)
+                double[] x = {
+                    108, 115, 106, 97, 95, 91, 97, 83, 83, 78, 54, 67, 56,
+                    53, 61, 115, 81, 78, 30, 45, 99, 32, 25, 28, 90, 89
+                };
+                double[] y = {
+                    95, 96, 95, 97, 93, 94, 95, 93, 92, 86, 73, 80, 65,
+                    69, 77, 96, 87, 89, 60, 63, 95, 61, 55, 56, 94, 93
+                };
                 SRL model = new SRL(x, y);
                 model.fit();
                 double[] betas = model.coefficients();
 
                 System.out.println("Ecuación: " + RegressionOutput.equation(new String[]{"x"}, betas));
-                double[] inputs = {2, 4, 7};
+                double[] inputs = {65, 80, 100};
                 for (double input : inputs) {
                     System.out.println("Predicción para x = " + RegressionOutput.number(input)
                             + ": y = " + RegressionOutput.number(model.predict(input)));
                 }
-                System.out.println("R² = " + RegressionOutput.number(model.rSquared()));
+                System.out.println("R² SLR = " + RegressionOutput.number(model.rSquared()));
             } finally {
                 doDelete();
             }

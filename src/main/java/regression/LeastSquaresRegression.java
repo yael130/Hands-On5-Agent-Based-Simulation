@@ -23,7 +23,7 @@ abstract class LeastSquaresRegression {
         this.designMatrix = copy(designMatrix);
     }
 
-    /** Calcula beta = (X'X)^-1 X'y resolviendo el sistema con eliminación gaussiana. */
+    /** Calcula beta = (X'X)^-1 X'y resolviendo el sistema con eliminación gaussiana.*/
     public final void fit() {
         int parameters = designMatrix[0].length;
         double[][] normal = new double[parameters][parameters + 1];

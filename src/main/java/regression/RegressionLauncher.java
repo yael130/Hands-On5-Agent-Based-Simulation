@@ -18,6 +18,11 @@ public final class RegressionLauncher {
         // JADE escribe aquí los descriptores de plataforma y MTP, fuera de la raíz.
         profile.setParameter(Profile.FILE_DIR, "out/");
         ContainerController container = runtime.createMainContainer(profile);
+        if (container == null) {
+            System.err.println("No se pudo iniciar JADE: el puerto 1099 está ocupado. "
+                    + "Detén la otra plataforma JADE con Ctrl+C y vuelve a ejecutar.");
+            return;
+        }
 
         start(container, "SLR", SLRAgent.class);
         start(container, "PR", PRAgent.class);
